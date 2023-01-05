@@ -1,0 +1,32 @@
+El componente Carousel utiliza las prop (ViewPropTypes) que están "deprecated".
+Para utilizar este componente hay que hacer estos procedimientos y modificaciones 
+dentro del node-module.
+
+1- Install patch-package (se usa para que los cambios sean más persistentes)
+
+2- Instalar: npm i deprecated-react-native-prop-types
+
+3- En la carpeta node-module/react-native-snap-carousel (y sus subcarpetas):
+chequear todos los archivos y cambiar esta importación:
+
+	import { ViewPropTypes } from 'react-native';
+
+por esta otra:
+
+	import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+
+********************************************************************************************************
+NOTA: Los archivos a modificar son: 
+
+	src/carousel/Carousel.js, 
+	src/pagination/Pagination.js, 
+	src/pagination/PaginationDot.js
+	src/parallaximage/ParallaxImage.js
+
+En todos los casos la prop (ViewPropTypes) está en la "lista distructuring" de react-native, quitarla de alli y agregar la importación completa como se indica arriba
+********************************************************************************************************
+4- Ejecutar: npx patch-package react-native to save the patch (si lo instaló).
+
+5- Reconstruya la app (rebuilt)
+
+NOTA: Tener en cuenta que este procedimiento deberá volver a aplicarse con cada actualización o proyecto nuevo de react-native (en el que utilicen este componente), o hasta que las bibliotecas en cuestión actualicen la importación de los "deprecated-react-native-prop-types".
